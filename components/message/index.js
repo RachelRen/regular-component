@@ -1,8 +1,16 @@
 import Regular from 'regularjs';
 
-import template from './index.html';
-import './index.scss';
+// import template from './index.html';
+// import './index.scss';
 
+var template = `
+	<div class="m-tip-wrap" r-class={{"u-success-tip": type=="success", "u-error-tip": type=="error"}}>
+		<span class="iconfont" 
+		r-class={{"tip_success": type=="success", "tip_error": type=="error"}}></span>
+		{#include content}
+		<a href="javascript:void(0)" class="iconfont tip_close" on-click={this.__evClose()}></a>
+	</div>
+`
 var Message = Regular.extend({
 	template: template,
 	config: function(data){

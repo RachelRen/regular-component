@@ -1,12 +1,12 @@
 {
   "name": "regular-component",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server",
-    "lib1": "babel src -d lib",
+    "lib1": "babel components -d lib",
     "lib": "webpack --config webpack.lib.config.js --progress --colors",
     "build": "webpack --config webpack-production.config.js --progress --colors"
   },

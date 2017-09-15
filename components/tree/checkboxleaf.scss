@@ -1,0 +1,39 @@
+@import "../assets/sass/var.scss";
+
+.m-role-tree {
+	
+	
+
+	.u-check {
+		text-align: center;
+		border: 1px solid $grayColor;
+		width: 14px;
+		height: 14px;
+		line-height: 14px;
+		position: relative;
+		display: inline-block;
+		vertical-align: middle;
+		&.mulTreeCheck{
+			left: -14px;
+		}
+	}
+	
+	
+	.disabled {
+		cursor: default !important;
+		&::before{
+		    content: "";
+		    background: $grayColor;
+		    display: inline-block;
+		    width: 14px;
+		    height: 14px;
+		    position: absolute;
+		    opacity: 0.2;
+		    left: 0;
+		    top: 0;
+		}
+	}
+	
+
+	
+}
