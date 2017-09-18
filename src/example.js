@@ -1,4 +1,4 @@
-// import './assets/sass/style.scss';
+import './assets/sass/style.scss';
 import Regular from 'regularjs';
 
 import Tree from './tree/index';

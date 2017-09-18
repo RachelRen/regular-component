@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server",
+    "start": "webpack-dev-server",
     "lib1": "babel components -d lib",
     "lib": "webpack --config webpack.lib.config.js --progress --colors",
     "build": "webpack --config webpack-production.config.js --progress --colors"
