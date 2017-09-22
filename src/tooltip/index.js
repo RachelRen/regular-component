@@ -9,6 +9,7 @@ import './index.scss';
 
 var ToolTip = Regular.extend({
 	template: template,
+	name: 'tooltip',
 	config: function(data){
 		var self = this,
 			sdata = self.data,
@@ -29,13 +30,53 @@ var ToolTip = Regular.extend({
 	init: function(){
 		var self = this,
 			sdata = self.data;
-			debugger;
 		// this.$on("inject", function(){
 		// 	debugger;
 			
 		// });
+		
 		this.$inject(document.body);
-		self.show(sdata.top, sdata.left);
+		this.__addEvents();
+
+		//self.show(sdata.top, sdata.left);
+	},
+	__addEvents: function(){
+		this.data.target.onmouseover = (event) => {
+			var self = this,
+	            sdata = self.data,
+	            target = sdata.target,
+	            clientRect = target.getBoundingClientRect(),
+	            width = clientRect.width,
+	            top = clientRect.top,
+	            left = clientRect.left;
+
+	        self.show(top, left);
+
+		}
+		this.data.target.onmouseout = (event) => {
+			this.hide(event);
+			// var self = this,
+	  //           sdata = self.data,
+	  //           target = sdata.target,
+	  //           clientRect = target.getBoundingClientRect(),
+	  //           width = clientRect.width,
+	  //           top = clientRect.top,
+	  //           left = clientRect.left;
+
+	  //       self.show(top, left);
+
+		}
+		// this.data.target.onmouseover = function(){
+		// 	debugger;
+			
+		// }
+		// this.$on("tooltip", function(event){
+		// 	debugger;
+		// })
+		// this.data.target.$on("mouseover", function(){
+		// 	debugger;
+		// })
+
 	},
 	show: function(sTop, sLeft){
 		console.log("show");

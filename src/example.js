@@ -3,14 +3,55 @@ import Regular from 'regularjs';
 
 import Tree from './tree/index';
 import ToolTip from './tooltip/index';
+import Popover from './popover/index';
 
-import Component from './select/index';
+import Select from './select/index';
 import Pager from './pager/index';
 import Message from './message/index';
 
 import InputNumber from './inputnumber/index';
 
+// import Calendar from './calendar/index';
 import Calendar from './calendar/index';
+import Checkbox from './checkbox/index';
+
+import DatePicker from './datepicker/index';
+
+import Cascader from './cascader/index';
+
+const options = [{
+	value: 'zhejiang',
+	label: 'Zhejiang',
+	children: [{
+		value: 'hangzhou',
+		label: 'Hangzhou',
+		children: [{
+			value: 'xihu',
+			label: 'West Lake',
+		}],
+	}],
+}, {
+	value: 'jiangsu',
+	label: 'Jiangsu',
+	children: [{
+		value: 'nanjing',
+		label: 'Nanjing',
+		children: [{
+			value: 'zhonghuamen',
+			label: 'Zhong Hua Men',
+		}],
+	}],
+}];
+var Note = Regular.extend({
+  template:`
+  	<checkbox text="rere" checked></checkbox>
+  	<DatePicker format="yyyy/MM/dd"/>
+  	<DatePicker format="yyyy/MM/dd" mode="month"/>
+  `
+});
+
+// inject component into #app , you can also inject at 'before' , 'after', 'top'.
+var note = new Note().$inject("#component");
 
 // import Test from './index'
 // console.log(Test);
@@ -93,20 +134,36 @@ let tree3 = new Tree({
 })
 
 tree3.$inject("#component");
+let cascader = new Cascader({
+	data: {
+		list: options
+	}
+})
+
+cascader.$inject("#component");
 
 
+new ToolTip({
+	data: {
+		// placement: "right",
+		target: document.getElementById("toolTip"),
+        content: "基于员工的职位、职级、年度绩效、基本薪资以及部门调薪额度，测算出建议调薪金额供主管参考。"
+	}
+})
+new Popover({
+	data: {
+		// placement: "right",
+		target: document.getElementById("popover"),
+		title: "title",
+        content: "基于员工的职位"
+	}
+})
 
-window.buttonClick = function(){
-	new ToolTip({
-		data: {
-			// placement: "right",
-			target: document.getElementById("toolTip"),
-	        content: "基于员工的职位、职级、年度绩效、基本薪资以及部门调薪额度，测算出建议调薪金额供主管参考。"
-		}
-	})
-}
+// window.buttonClick = function(){
+	
+// }
 
-let select = new Component({
+let select = new Select({
 	data: {
 		value: '1',
 		class: 'selectClass',

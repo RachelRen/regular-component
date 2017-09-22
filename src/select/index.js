@@ -243,7 +243,7 @@ var Option = Regular.extend({
 
 Dropdown.component('option', Option);
 
-var Component = Regular.extend({
+var Select = Regular.extend({
 	template: template,
 	config: function(data) {
 		let self = this,
@@ -414,19 +414,19 @@ var Component = Regular.extend({
 		// }else{
 		// 	Regular.dom.delClass($selectSection,"select-open");
 		// }
-		index = Component.shows.indexOf(self);
+		index = Select.shows.indexOf(self);
 		if(sdata.isShow && index == -1){
-			Component.shows.push(self);
+			Select.shows.push(self);
 		}else if(!sdata.isShow && index >= 0){
-			Component.shows.splice(index, 1);
+			Select.shows.splice(index, 1);
 		}
 
 	}
 });
 
-Component.shows = [];
+Select.shows = [];
 Regular.dom.on(document, "click", function(e){
-	Component.shows.forEach(function(o){
+	Select.shows.forEach(function(o){
 		var element = o.$refs.select,//点击的那部分
 			dropdown = o.data.dropdown.$refs.dropdown,//展示的那部分
 			element2 = e.target;
@@ -441,6 +441,6 @@ Regular.dom.on(document, "click", function(e){
 
 	});
 });
-// Component.component('dropdown', Dropdown);
-export default Component;
-// module.exports = Component;
+// Select.component('dropdown', Dropdown);
+export default Select;
+// module.exports = Select;

@@ -1,24 +1,42 @@
-<div class="u-calendar {class}">
-	<div class="calendar_hd">
-		<span class="calendar_prev">
-			<span class="calendar_item" on-click={this.__addYear(-1)}>&lt;&lt;</span>
-			<span class="calendar_item" on-click={this.__addMonth(-1)}>&lt;</span>
-		</span>
-		<span>{yearMonth}</span>
-		<span class="calendar_next">
-			<span class="calendar_item" on-click={this.__addMonth(1)}>&gt;</span>
-			<span class="calendar_item" on-click={this.__addYear(1)}>&gt;&gt;</span>
-		</span>
-	</div>
-	<div class="calendar_bd">
-		<div class="calendar_week">
-		{#list week as aList by aList_index}<span class="calendar_item">{@(aList)}</span>{/list}
-		</div>
-		<div class="calendar_days">
-			{#list days as aList by aList_index}<span 
-			r-class={{"z-disabled": aList.disabled, "z-selected": selectedIndex == aList_index}} 
-			{#if !aList.disabled || (aList.isSelected && !aList.isSelected)} delegate-click={this.__evSelect(aList, aList_index)} {/if}
-			class="calendar_item">{aList.day}</span>{/list}
-		</div>
-	</div>
+<div class="u-reminder-calendar-header">
+	<select class="calendar-select" r-model={thisYear} value={thisYear} list={yearList}>
+	</select>
+	<select class="calendar-select" r-model={thisMonth} value={thisMonth} list={monthList}>
+	</select>
 </div>
+<table class="u-reminder-calendar">
+	<thead>
+		<tr>
+			<th class="reminder-calendar-header">日</th>
+			<th class="reminder-calendar-header">一</th>
+			<th class="reminder-calendar-header">二</th>
+			<th class="reminder-calendar-header">三</th>
+			<th class="reminder-calendar-header">四</th>
+			<th class="reminder-calendar-header">五</th>
+			<th class="reminder-calendar-header">六</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#list dayList as aList}
+			<tr>
+				{#list aList as item}
+					<td 
+					r-class={{"notCurrentMonth": item.disabled, "calendar-selected-date": item.title == today}}>
+						<div class="reminder-calendar-date" 
+							{#if item.classNames.length}
+								on-mouseover={this.__evshowConent($event, aList_index, item_index)}
+								on-mouseout={this.__evHideConent($event, aList_index, item_index)}
+							{/if}>
+							<div class="reminder-calendar-value">{item.day}</div>
+							<div class="reminder-calendar-icons">
+								{#list item.classNames as icon}<i class="iconfont {icon}"></i>{/list}
+							</div>
+						</div>
+						
+					</td>
+				{/list}
+			</tr>
+		{/list}
+		
+	</tbody>
+</table>

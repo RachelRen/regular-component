@@ -1,0 +1,19 @@
+<div class="u-datepicker {class}" ref="element">
+	<div class="datepicker-header">
+		<input type="text" placeholder="请选择日期" ref="input"  class="datepicker-input" value={date}
+		 on-focus={this.__evFocus()} on-click={this.__evToggle()} on-change={this.__evChange($event)}
+		 on-blur={this.__evBlur($event)} />
+		 <i class="iconfont icon-calendar calendarIcon" on-click={this.__evToggle()}></i>
+	</div>
+	<div class="datepicker_bd" r-hide={!show}>
+		{#if mode == "month"}
+			<monthPicker on-select={this.__evSelect($event)} selectedDate={date} minDate={minDate} maxDate={maxDate}></monthPicker>
+		{#else}
+			<calendar ref="calendar" selectedDate={date}
+			minDate={minDate} maxDate={maxDate}
+			show={show} on-select={this.__evSelect($event)} on-show={this.__show()}></calendar>
+		{/if}
+
+
+	</div>
+</div>

@@ -2,18 +2,17 @@ import Regular from 'regularjs';
 
 import template from './index.html';
 import './index.scss';
-import ToolTip from '../tooltip/index'
 
 // var Tooltip = require('/javascript/components/tooltip/index.es6');
 
-var Popover = ToolTip.extend({
+var Checkbox = Regular.extend({
 	template: template,
+	name: 'checkbox',
 	config: function(data){
 		var self = this,
 			sdata = self.data,
 			defaults = {
-				placement: "",//位置 默认是top
-				popoverClassName: ""
+				
 			};
 
 		let newData = {};
@@ -21,16 +20,16 @@ var Popover = ToolTip.extend({
 
 		this.data = newData;
 		
-		self.supr(this.data);
 	},
 	init: function(data){
-		this.supr(data);
 	},
-	// __evToolTipLeave: function(){
-	// 	this.supr();
-	// }
+	onChange: function($event){
+		if(typeof this.data.onChange == "function"){
+			this.data.onChange.call(this, this.data.checkbox);
+		}
+	}
 	
 	
 });
 
-export default Popover;
+export default Checkbox;
