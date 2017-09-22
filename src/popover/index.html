@@ -1,8 +1,9 @@
-<div class="u-poptip u-tooltip-hidden {poptipClassName}" on-mouseout={this.__evToolTipLeave($event)} r-style={style} ref="toolTip">
-	<div class="u-poptip-content">
-		<div class="u-poptip-arrow u-poptip-arrow-right" 
-		r-class={{"u-poptip-arrow-left": arrowDirction=="left"}}></div>
-		<div class="u-poptip-inner">
+<div class="u-popover u-tooltip-hidden {popoverClassName}" on-mouseout={this.__evToolTipLeave($event)} r-style={style} ref="toolTip">
+	<div class="u-popover-content">
+		<div class="u-popover-arrow u-popover-arrow-right" 
+		r-class={{"u-popover-arrow-left": arrowDirction=="left"}}></div>
+		<div class="u-popover-title">{title}</div>
+		<div class="u-popover-inner">
 			{#include content}
 		</div>
 	</div>

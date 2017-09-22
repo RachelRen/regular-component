@@ -1,0 +1,24 @@
+<div class="u-calendar {class}" ref="component" r-style={style}>
+	<div class="calendar_hd">
+		<span class="calendar_prev">
+			<span class="calendar_item" on-click={this.__addYear(-1)}>&lt;&lt;</span>
+			<span class="calendar_item" on-click={this.__addMonth(-1)}>&lt;</span>
+		</span>
+		<span>{yearMonth}</span>
+		<span class="calendar_next">
+			<span class="calendar_item" on-click={this.__addMonth(1)}>&gt;</span>
+			<span class="calendar_item" on-click={this.__addYear(1)}>&gt;&gt;</span>
+		</span>
+	</div>
+	<div class="calendar_bd">
+		<div class="calendar_week">
+		{#list week as aList by aList_index}<span class="calendar_item">{@(aList)}</span>{/list}
+		</div>
+		<div class="calendar_days">
+			{#list days as aList by aList_index}<span 
+			r-class={{"z-disabled": aList.disabled, "z-selected": selectedIndex == aList_index}} 
+			{#if !aList.disabled || (aList.isSelected && !aList.isSelected)} on-click={this.__evSelect(aList, aList_index)} {/if}
+			class="calendar_item">{aList.day}</span>{/list}
+		</div>
+	</div>
+</div>
