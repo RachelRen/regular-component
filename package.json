@@ -8,6 +8,7 @@
     "start": "webpack-dev-server",
     "lib1": "babel components -d lib",
     "lib": "webpack --config webpack.lib.config.js --progress --colors",
+    "lib2": "webpack --config webpack.dev.config.js --progress --colors",
     "build": "webpack --config webpack-production.config.js --progress --colors"
   },
   "author": "",
@@ -21,6 +22,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
