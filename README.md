@@ -1,12 +1,13 @@
-Regular Component is a set of frend-end components built with RegularJS.
+Regular Component is a set of frend-end components built with [RegularJS](https://github.com/regularjs/regular).
 
-Install
+#Install
 
+```
 npm install regular-component
+```
 
-
-Usage
-
+#Usage
+```
 import {Select} from 'regular-component';
 
 let select = new Select({
@@ -29,15 +30,19 @@ let select = new Select({
 	}
 })
 select.$inject("#component");
+```
 
 And import style manully:
 
+```
 import 'regular-component/dist/index.css'
+```
 
+#Development
 
-Development
-
+```
 $ git clone git@github.com:ant-design/ant-design.git
 $ npm install
 $ npm start
+```
 
