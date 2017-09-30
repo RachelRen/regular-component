@@ -19,6 +19,10 @@ import DatePicker from './datepicker/index';
 
 import Cascader from './cascader/index';
 
+import Loading from './loading/index';
+
+import AssociatedInput from './associatedinput/index';
+
 const options = [{
 	value: 'zhejiang',
 	label: 'Zhejiang',
@@ -47,6 +51,8 @@ var Note = Regular.extend({
   	<checkbox text="rere" checked></checkbox>
   	<DatePicker format="yyyy/MM/dd"/>
   	<DatePicker format="yyyy/MM/dd" mode="month"/>
+  	<loading  />
+  	<associatedinput />
   `
 });
 
