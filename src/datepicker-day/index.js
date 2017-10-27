@@ -14,8 +14,8 @@ var CalendarPicker = Regular.extend({
 			defaults = {
 				week: ["日","一","二","三","四","五","六"],
 				initDate: "",
-				currentDay: formatTime(new Date(), data.format)
-
+				currentDay: formatTime(new Date(), data.format),
+				// selectedIndex: -1
 			};
 			let newData = {};
 			Object.assign(newData, defaults, sdata);
@@ -47,7 +47,6 @@ var CalendarPicker = Regular.extend({
 				display: "block"
 			}
 		})
-
 		this.__getDays(new Date(sdata.value), sdata.value);
 	},
 	hide: function(){
@@ -131,13 +130,14 @@ var CalendarPicker = Regular.extend({
 				day: i + 1
 			});
 		}
-		sdata.selectedIndex = -1;
+		// sdata.selectedIndex = -1;
 		var selectedDate = new Date(currentDay);
-		if(_year == selectedDate.getFullYear() && _month == selectedDate.getMonth()){
-			// days[].isSelected = true;
-			sdata.selectedIndex = selectedDate.getDate() + _firstDayIndex - 1;
-		}
-
+		// if(_year == selectedDate.getFullYear() && _month == selectedDate.getMonth()){
+		// 	// days[].isSelected = true;
+		// 	// sdata.selectedIndex = selectedDate.getDate() + _firstDayIndex - 1;
+			
+		// }
+		sdata.selectedDay = sdata.selectedDay ? sdata.selectedDay : selectedDate.getDate();
 		var _lastDayIndex = (_monthDays + _firstDayIndex) % 7;
 		if(_lastDayIndex > 0){
 			days = days.concat(self.__getNextMonthDays(_year, _month+1, 7 - _lastDayIndex));
@@ -200,10 +200,10 @@ var CalendarPicker = Regular.extend({
 		var self = this,
 			sdata = self.data,
 			month = sdata.month + 1;
-
 		var date = formatTime((sdata.year + "/" + month + "/" + item.day), sdata.format );
 		self.$update({
-			selectedIndex: index
+			// selectedIndex: index,
+			selectedDay: item.day
 		});
 		self.$emit("select", date);
 

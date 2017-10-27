@@ -7,6 +7,7 @@
 // const Regular = require('Regular');
 
 import Regular from 'regularjs';
+import {getLocation} from '../util/location';
 
 import template from './index.html';
 import './index.scss';
@@ -369,13 +370,15 @@ var Select = Regular.extend({
 		
 		if(!sdata.isShow){
 			let panel = $event.origin,
-				rect = panel.getBoundingClientRect();
+				rect = panel.getBoundingClientRect(),
+				location = getLocation($selectSection, panel, "bottom");
 
+				
 			dropdown.$update({
 				isShow: !sdata.isShow,
 				style: {
-					top: rect.top + panel.offsetHeight + "px",
-					left: rect.left + "px",
+					top: location.top + "px",
+					left: location.left + "px",
 					width: rect.right - rect.left + "px"
 				}
 			});

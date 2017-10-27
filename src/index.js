@@ -11,5 +11,16 @@ export InputNumber from './inputnumber/index';
 
 export Calendar from './calendar/index';
 
+export Checkbox from './checkbox/index';
+
+export DatePicker from './datepicker/index';
+
+export Cascader from './cascader/index';
+
+export Loading from './loading/index';
+
+export AssociatedInput from './associatedinput/index';
+
+
 
 

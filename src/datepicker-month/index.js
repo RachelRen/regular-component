@@ -49,26 +49,25 @@ var MonthPicker = Regular.extend({
 		var self = this,
 			sdata = self.data;
 		this.$inject(document.body);
-
+		debugger;
 		self.show();
 		self.__addWatcher();
 	},
 	show: function(){
 		var {data: sdata} = this,
-			{value} = sdata,
-			thisDate = value ? new Date(value): new Date(),
+			{value, selectedMonth, selectedYear, currentDay} = sdata,
+			thisDate = value ? new Date(value) : new Date(),
 			{top, left} = getLocation(this.$refs.component, sdata.target, "bottom");
 			
-
 		this.$update({
 			style: {
 				top: top + "px",
 				left: left + "px",
 				display: "block"
 			},
-			selectedMonth: thisDate.getMonth() + 1,
-			selectedYear: thisDate.getFullYear(),
-			currentDay: formatTime(thisDate, ( sdata.format || "yyyy-MM"))
+			selectedMonth: selectedMonth ? selectedMonth : thisDate.getMonth() + 1,
+			selectedYear: selectedYear ? selectedYear : thisDate.getFullYear(),
+			currentDay: currentDay ? currentDay : formatTime(thisDate, ( sdata.format || "yyyy-MM"))
 		});
 	},
 	hide: function(){

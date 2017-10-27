@@ -17,10 +17,12 @@ var Cascader = Regular.extend({
 		var self = this,
 			sdata = self.data,
 			defaults = {
-				selectedItem: {
-					"deptId": "",
-					"deptName": ""
-				}
+				showName: "",
+				id: ""
+				// selectedItem: {
+				// 	"deptId": "",
+				// 	"deptName": ""
+				// }
 			};
 		let newData = {};
 		Object.assign(newData, defaults, sdata);
@@ -41,8 +43,18 @@ var Cascader = Regular.extend({
 					list: sdata.list,
 					target: $refs.selectdrop
 				}
-			}).$inject(document.body).$on("selectList", (item) => {
-				debugger;
+			}).$inject(document.body).$on("selectList", (list) => {
+				let showName = '';
+				list.forEach( o => {
+					showName = showName ? o.name + ' / ' +  showName : o.name;
+				})
+				this.$update({
+					showName: showName,
+					id: list[0].id
+				})
+				if(typeof this.data.onChange == "function"){
+					this.data.onChange.call(this, list);
+				}
 			});
 		}
 		

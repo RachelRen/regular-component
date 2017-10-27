@@ -13,7 +13,7 @@ var InputNumber = Regular.extend({
 				defaultValue: '',
 				isPositive: false,
 				showHandler: true
-				// maxValue: //最大数
+				// max: //最大数
 			};
 
 		let newData = {};
@@ -68,7 +68,7 @@ var InputNumber = Regular.extend({
 			return;
 		}
 		//有最大值
-		if(sdata.maxValue && showValue > sdata.maxValue){
+		if(sdata.max && showValue > sdata.max){
 			showValue = sdata.value;
 			self.$update({
 				showValue: showValue
@@ -85,6 +85,9 @@ var InputNumber = Regular.extend({
 	},
 	__evFocus: function($event){
 		this.$emit("focus");
+		if(typeof this.data.onFocus == "function"){
+			this.data.onFocus(value);
+		}
 	},
 	__updateValue: function(value){
 		let self = this;

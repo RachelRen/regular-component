@@ -14,7 +14,7 @@ var Loading = Regular.extend({
 					msg: "",
 					code: ""
 				},
-				ajaxState: 'loading',//[loading | complete | error]
+				state: 'loading',//[loading | complete | error]
 			};
 
 		let newData = {};

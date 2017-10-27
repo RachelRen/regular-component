@@ -3,6 +3,7 @@
 // var Regular = require('Regular');
 
 import Regular from 'regularjs';
+import {getLocation} from '../util/location';
 
 import template from './index.html';
 import './index.scss';
@@ -14,7 +15,7 @@ var ToolTip = Regular.extend({
 		var self = this,
 			sdata = self.data,
 			defaults = {
-				placement: "",//位置 默认是top
+				placement: "top",//位置 默认是top
 				topTipClassName: "",
 				arrowDirction: "",
 				// target:{}
@@ -84,7 +85,9 @@ var ToolTip = Regular.extend({
 
 		var self = this,
 			sdata = self.data,
-			toolTip = self.$refs.toolTip;
+			toolTip = self.$refs.toolTip,
+			target = sdata.target,
+			placement = sdata.placement;
 			// target = sdata.target,
 			// clientRect = target.getBoundingClientRect(),
 			// width = clientRect.width,
@@ -93,38 +96,45 @@ var ToolTip = Regular.extend({
 			return;
 		}
 		Regular.dom.delClass(toolTip, "u-tooltip-hidden");
-		var client = toolTip.getBoundingClientRect(),
-			top = client.top,
-			left = client.left,
-			width = client.width,//toolTip
-			height = client.height,
-			target = sdata.target,
-			targetRact = target.getBoundingClientRect(),
-			sTop = targetRact.top,
-            sLeft = targetRact.left,
-			placement = sdata.placement,
-			top, left;
+		// var client = toolTip.getBoundingClientRect(),
+		// 	top = client.top,
+		// 	left = client.left,
+		// 	width = client.width,//toolTip
+		// 	height = client.height,
+		// 	target = sdata.target,
+		// 	targetRact = target.getBoundingClientRect(),
+		// 	sTop = targetRact.top,
+  //           sLeft = targetRact.left,
+		// 	placement = sdata.placement,
+		// 	top, left;
+		//组件，target
 
+		var location = getLocation(toolTip, target, placement);
 		Regular.dom.addClass(toolTip, "zoom-big-enter zoom-big-enter-active");
-		if(!placement){
-			top = (sTop - height);
-			left = (sLeft - parseInt(width/2));
+		// if(!placement){
+		// 	top = (sTop - height);
+		// 	left = (sLeft - parseInt(width/2));
 
-			top = top < 0 ? 0 : top;
-			left = left < 0 ? 0 : left;
-		}else if(placement == "right"){
-			top = sTop;
-			left = sLeft + targetRact.width + 8;
-			if(left + width > document.body.clientWidth){//太右边了，就放在左边
-				left = sLeft - width - 8;
-				sdata.arrowDirction = "left";
-			}
-		}
-		
+		// 	top = top < 0 ? 0 : top;
+		// 	left = left < 0 ? 0 : left;
+		// }else if(placement == "right"){
+		// 	top = sTop;
+		// 	left = sLeft + targetRact.width + 8;
+		// 	if(left + width > document.body.clientWidth){//太右边了，就放在左边
+		// 		left = sLeft - width - 8;
+		// 		sdata.arrowDirction = "left";
+		// 	}
+		// }
 		self.$update({
 			style: {
-				top: top + "px",
-				left: left + "px"
+				top: location.top + "px",
+				left: location.left + "px"
+			},
+			arrowClass: {
+				'u-poptip-arrow-left': location.arrowDirction == "left",
+				'u-poptip-arrow-right': location.arrowDirction == "right",
+				'u-poptip-arrow-up': location.arrowDirction == "up",
+				'u-poptip-arrow-down': location.arrowDirction == "down"
 			}
 		});
 		setTimeout(function(){

@@ -49,7 +49,6 @@ var DropList = Regular.extend({
 	hide: function(){
 		this.$update({
 			style: {
-				
 				display: "none"
 			}
 		})
@@ -61,7 +60,10 @@ var DropList = Regular.extend({
 
 
 		this.$update({
-			selectedIndex: index
+			selectedIndex: index,
+			style: {
+				display: "block"
+			}
 		});
 		
 
@@ -91,6 +93,13 @@ var DropList = Regular.extend({
 			// 	self.__evMouseout();
 			// })
 	},
+	__mouseoutHide: function(){
+		this.$update({
+			selectedIndex: -1
+		});
+		this.hide();
+		this.$emit("mouseoutHide");
+	},
 	__evMouseout: function($event){
 		var self = this,
 			sdata = self.data,
@@ -110,6 +119,8 @@ var DropList = Regular.extend({
         this.$update({
 			selectedIndex: -1
 		});
+		this.hide();
+		this.$emit("mouseoutHide");
         return;
 
 		if($event.target.className == "select-list-wrap"){
@@ -140,16 +151,25 @@ var DropList = Regular.extend({
 			$refs = self.$refs;
 
 		console.log("click");
-		self.$emit("selectList", {
-			value: item.value,
-			label: item.label
-		});
+		self.$emit("selectList", [{
+			id: item.id,
+			name: item.name
+		}]);
 
 			
 	},
-	__selectList: function($event){
-		var self = this;
-		self.$emit("selectList", $event);
+	__selectList: function(selectList){
+		var self = this,
+			{data: sdata} = self,
+			{list, selectedIndex} = sdata,
+			item = list[selectedIndex];
+
+		selectList.push({
+			id: item.id,
+			name: item.name
+		});
+		// this.data.selectedIndex
+		self.$emit("selectList", selectList);
 	},
 	__animateShow: function(){
 		var self = this,
@@ -193,14 +213,14 @@ var DropList = Regular.extend({
 			}
 		});
 	},
-	__formatDataList: function(list){
-		list.forEach(function(o, i){
-			o.id = o.deptId;
-			o.name = o.deptName;
-		});
+	// __formatDataList: function(list){
+	// 	list.forEach(function(o, i){
+	// 		o.id = o.deptId;
+	// 		o.name = o.deptName;
+	// 	});
 
-		return list;
-	}
+	// 	return list;
+	// }
 });
 
 export default DropList;

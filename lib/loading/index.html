@@ -1,0 +1,15 @@
+{#if ajaxState == "loading"}
+	<div class="u-tipBox">
+		<i class="iconfont icon-loading1"></i><br>
+	</div>
+{#elseif ajaxState == "error"}
+	<div class="u-tipBox">
+		出错啦!<br />[{error.code}]{error.msg}
+	</div>
+{#else}
+	<div class="u-tipBox">
+		<i class="iconfont">&#xe626;</i>
+		<br />
+		没有数据
+	</div>
+{/if}

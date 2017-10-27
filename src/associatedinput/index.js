@@ -103,6 +103,12 @@ var AssociatedInput =  Regular.extend({
 			_menuData.showList = [{
 				name: "name",
 				id: 1
+			},{
+				name: "name2",
+				id: 2
+			},{
+				name: "name 3",
+				id: 3
 			}];
 			_menuData.isHide = false;
 			_menuData.selectedIndex = 0;

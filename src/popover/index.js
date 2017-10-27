@@ -12,7 +12,7 @@ var Popover = ToolTip.extend({
 		var self = this,
 			sdata = self.data,
 			defaults = {
-				placement: "",//位置 默认是top
+				placement: "top",//位置 默认是top
 				popoverClassName: ""
 			};
 

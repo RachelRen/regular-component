@@ -1,7 +1,7 @@
-<div class="select-drop" ref="selectdrop" on-mouseout={this.__evMouseout($event)}>
+<div class="select-drop" ref="selectdrop">
 	<div class="select-hd" on-click="{this.__evClick($event)}">
 		<span class="select-text"  >
-			{selectedItem.label || "请选择"}
+			{showName || "请选择"}
 		</span>
 	</div>
 	<!-- <div class="select-bd slideInDown" ref="selectBd">

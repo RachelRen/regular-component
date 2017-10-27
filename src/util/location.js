@@ -16,8 +16,16 @@ export function getLocation(component, target, placement){
 		// sTop = targetRact.top,
   //       sLeft = targetRact.left,
 		// placement = sdata.placement,
-		arrowDirction;
-
+		arrowDirction,
+		scrollTop = 0;
+		
+		if (document.documentElement &&
+			document.documentElement.scrollTop) {
+			scrollTop = document.documentElement.scrollTop;
+		} else if (document.body) {
+			scrollTop = document.body.scrollTop;
+		}
+		sTop += scrollTop;
 	// Regular.dom.addClass(toolTip, "zoom-big-enter zoom-big-enter-active");
 	if(!placement){
 		top = (sTop - height);
@@ -28,11 +36,12 @@ export function getLocation(component, target, placement){
 	}else{
 		switch(placement){
 			case "right":
-				top = sTop;
+				top = ~~(sTop - height/2);
 				left = sLeft + targetRact.width + 8;
+				arrowDirction = "left"
 				if(left + width > document.body.clientWidth){//太右边了，就放在左边
 					left = sLeft - width - 8;
-					arrowDirction = "left";
+					arrowDirction = "right";
 				}
 				break;
 			case "left":

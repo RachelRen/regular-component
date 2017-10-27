@@ -24,25 +24,25 @@ import Loading from './loading/index';
 import AssociatedInput from './associatedinput/index';
 
 const options = [{
-	value: 'zhejiang',
-	label: 'Zhejiang',
+	id: '1',
+	name: 'Zhejiang',
 	children: [{
-		value: 'hangzhou',
-		label: 'Hangzhou',
+		id: '11',
+		name: 'Hangzhou',
 		children: [{
-			value: 'xihu',
-			label: 'West Lake',
+			id: '111',
+			name: 'West Lake',
 		}],
 	}],
 }, {
-	value: 'jiangsu',
-	label: 'Jiangsu',
+	id: '2',
+	name: 'Jiangsu',
 	children: [{
-		value: 'nanjing',
-		label: 'Nanjing',
+		id: '22',
+		name: 'Nanjing',
 		children: [{
-			value: 'zhonghuamen',
-			label: 'Zhong Hua Men',
+			id: '222',
+			name: 'Zhong Hua Men',
 		}],
 	}],
 }];
@@ -107,7 +107,7 @@ let tree2 = new Tree({
 				callback(loadList(id))
 			}
 		})(),
-		selectItemCallback: function(json){
+		onSelect: function(json){
 			debugger;
 		}
 	}
@@ -153,7 +153,8 @@ new ToolTip({
 	data: {
 		// placement: "right",
 		target: document.getElementById("toolTip"),
-        content: "基于员工的职位、职级、年度绩效、基本薪资以及部门调薪额度，测算出建议调薪金额供主管参考。"
+        content: "基于员工的职位、职级、年度绩效、基本薪资以及部门调薪额度，测算出建议调薪金额供主管参考。",
+        placement: "right"
 	}
 })
 new Popover({

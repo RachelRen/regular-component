@@ -1,0 +1,16 @@
+<div ref="assInputContainer" on-click={this.focus($event)} class="clearfix u-associatedInputContainer" >
+    
+	{#list selectedList as ilist}
+		<div class="u-selectedItem associatedIndex{ilist.id}" ref="selectedItem" data-id={ilist.id}>
+			<strong>{ilist.name}</strong><a href="javascript: void(0)" on-click={this.deleteItem(ilist_index)}>
+				<i class="iconfont">&#xe625;</i>
+			</a>
+		</div>
+	{/list}
+	{#if !maxlength || selectedList.length < maxlength}
+	<div ref="inputcontainer" class="u-assinput">
+		<input type="text" placeholder="" on-keyup={this.associate($event)} on-keydown={this.backspaceAssociate($event)}  ref="assInput" r-model="assInput" class="u-input" on-blur={this.__evBlur($event)} />
+	   	<span class="nui-editableAddr-txt">{assInput}W</span>
+	</div>
+	{/if}
+</div>

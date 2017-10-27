@@ -29,12 +29,17 @@ var DatePicker = Regular.extend({
 			defaults = {
 				show: false,
 				hideTimeout: null,
-				mode: "day"//["day", "month"]
+				mode: "day",//["day", "month"]
+				format: "yyyy-MM-dd" //["yyyy-MM-dd", "yyyy-MM"]
 			};
 		let newData = {};
 		Object.assign(newData, defaults, sdata);
 
 		this.data = newData;
+
+		if(this.data.mode == "month"){
+			this.data.format = "yyyy-MM";
+		}
 	},
 	init: function(){
 		var self = this,
@@ -105,10 +110,9 @@ var DatePicker = Regular.extend({
 			show = !sdata.show;
 		}
 		sdata.show = show;
-
 		index = DatePicker.shows.indexOf(this);
 		if( show && index == -1){
-			DatePicker.shows.push(this);
+			
 			//显示
 			if(this.datepicker){
 				this.datepicker.show();
@@ -117,7 +121,6 @@ var DatePicker = Regular.extend({
 				if(sdata.mode == "month"){
 					picker = MonthPicker;
 				}
-
 				this.datepicker = new picker({
 					data: {
 						target: this.$refs.element,
@@ -127,12 +130,14 @@ var DatePicker = Regular.extend({
 					this.$update({
 						date: $event
 					})
+					this.datepicker.hide();
+					this.__evToggle(false);
 					if(typeof this.data.onChange == "function"){
 						this.data.onChange.call(this, $event);
 					}
 				});
 			}
-			
+			DatePicker.shows.push(this);
 		}else if(!show && index >= 0) {
 			this.datepicker.hide();
 			DatePicker.shows.splice(index, 1);
@@ -158,9 +163,10 @@ DatePicker.shows = [];
 Regular.dom.on(document, "click", function(e){
 	DatePicker.shows.forEach(function(o){
 		var element = o.$refs.element,
+			componentWrap = o.datepicker.$refs.component,
 			element2 = e.target;
 		while(element2){
-			if(element2 == element){
+			if(element2 == element || element2 == componentWrap){
 				return;
 			}
 			element2 = element2.parentNode;
