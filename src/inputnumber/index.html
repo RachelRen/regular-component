@@ -1,0 +1,11 @@
+<div class="input-number {class}">
+	<div class="input-number-handler-wrap" r-hide={!showHandler}>
+		<span class="iconfont input-number-handler icon-select-up" 
+			on-click={this.__evAdd(true)}></span>
+		<span class="iconfont input-number-handler icon-select-down" 
+			on-click={this.__evAdd(false)}></span>
+	</div>
+	<div class="input-number-input-wrap">
+		<input type="text" class="input-number-input" maxLength={maxLength} on-change={this.__evChange($event)} on-focus={this.__evFocus($event)} r-model={showValue} />
+	</div>
+</div>

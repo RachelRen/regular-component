@@ -1,0 +1,28 @@
+<ul class="roleTree_list {class}" ref="tree_list" r-style={rStyle}>
+	{#list list as aList by aList_index}
+		<li>
+			<div class="tree_item">
+				<i class="iconfont u-arrow"
+					r-class={{"icon-arrow-right": !aList.showChild, "icon-arrow-down": aList.showChild}}
+					r-hide={!(aList.hasChildren || aList.children && aList.children.length)} 
+					delegate-click={this.__evShowChildren(aList_index)}></i>
+				<label class="iconfont mulTreeCheck u-check" 
+						{#if !isReadOnly}delegate-click={this.__evClickCheck(aList_index)}{/if}
+						r-class={{"z-check": aList.value == 1, "z-part": aList.value == 2,"disabled": isReadOnly}}></label>
+				<span class="tree_name" r-class={{"select_item": aList.id == item.id}} 
+					on-click={this.__evSelectItem(aList_index)}>
+					<i class="iconfont icon-loading" r-hide={!aList.showLoading}></i>
+					<a href="javascript:void(0)" class="tree_name_link"><span>{@(aList.name)}</span></a>
+				</span>
+			</div>
+			{#if aList.children && aList.children.length}
+				<treeLeaf list={aList.children} class="tree-child-tree" isShow={aList.showChild} allValue={aList.value}
+				isReadOnly={isReadOnly} on-changeCheckVal={this.__changeCheckVal($event, aList_index)}
+				on-loadChildren={this.__loadChildren($event)}
+				on-selectItem={this.__selectItem($event, aList_index)} selectItem={item}></treeLeaf>
+			{/if}
+		</li>
+	{/list}
+	
+
+</ul>

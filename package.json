@@ -1,0 +1,45 @@
+{
+  "name": "regular-component",
+  "version": "0.0.22",
+  "description": "An UI design language and regularjs implementation",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "lib": "babel src --out-dir lib --copy-files",
+    "lib1": "webpack --config webpack.lib.config.js --progress --colors",
+    "lib2": "webpack --config webpack.dev.config.js --progress --colors",
+    "build": "webpack --config webpack-production.config.js --progress --colors"
+  },
+  "author": "Rachel Ren",
+  "license": "ISC",
+  "dependencies": {
+    "regularjs": "^0.6.0-beta.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.3",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-livereload-plugin": "^0.11.0",
+    "webpack-watch-livereload-plugin": "0.0.1"
+  }
+}

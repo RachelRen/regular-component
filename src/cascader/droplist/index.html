@@ -1,0 +1,17 @@
+<div class="select-list-wrap" ref="selectListWrap" on-mouseout={this.__evMouseout($event)} r-style={style}>
+	
+	<ul class="select-list">
+		{#list list as item by item_index}
+			<li class="select-result-item" delegate-mouseover="{this.__evMouseEnter($event, item_index, item.id)}" r-class='{{"selected": item_index == selectedIndex}}'>
+				<div class="select-result-label" r-class="{{'hasChild': item.children && item.children.length > 0}}" on-click="{this.__evClick($event, item)}"  >
+					{(item.name)}
+				</div>
+				{#if item.children && item.children.length}
+					<cascader-dropList list={@(item.children)} ref="childSelectList" on-selectList={this.__selectList($event)} show={item_index==selectedIndex} on-mouseoutHide={this.__mouseoutHide()}></cascader-dropList>
+				{/if}
+			</li>
+		{/list}
+	</ul>
+	
+</div>
+
