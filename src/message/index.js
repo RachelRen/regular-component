@@ -11,7 +11,8 @@ var Message = Regular.extend({
 			defaults = {
 				type:"",//["success", "error"]
 				wrap:"",
-				timeout: null
+				timeout: null,
+				duration: 2000 
 			};
 
 		let newData = {};
@@ -26,6 +27,9 @@ var Message = Regular.extend({
 	},
 	__evClose: function(index){
 		var self = this;
+		if(typeof this.data.onClose == "function"){
+			this.data.onClose.call(this);
+		}
 		clearTimeout(self.data.timeout);
 		self.data.timeout = null;
 		self.destroy();
@@ -36,7 +40,7 @@ var Message = Regular.extend({
 
 		self.data.timeout = setTimeout(function(){
 			self.__evClose();
-		}, 2000);
+		}, this.data.duration);
 	}
 	
 	

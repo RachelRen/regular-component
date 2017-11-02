@@ -12,7 +12,8 @@ var InputNumber = Regular.extend({
 				hasDecimal: false,
 				defaultValue: '',
 				isPositive: false,
-				showHandler: true
+				showHandler: true,
+				step: 1
 				// max: //最大数
 			};
 
@@ -43,19 +44,25 @@ var InputNumber = Regular.extend({
 			})
 		})
 	},
-	__evAdd: function(num){
+	__evAdd: function(isPositive){
 		let self = this,
 			sdata = self.data,
-			value = Math.floor(sdata.value || "") + num;
+			value = parseFloat(sdata.value || "");
+		if(isPositive){
+			value += sdata.step;
+		}else{
+			value -= sdata.step;
+		}
 
-		self.__updateValue(value);
+		self.__evChange(value);
+
 	},
 	
-	__evChange: function(){
+	__evChange: function(showValue = this.data.showValue){
 		console.log("change");
 		let self = this,
 			sdata = self.data,
-			showValue = sdata.showValue,
+			// showValue = sdata.showValue,
 			// re = /([0-9]+.[0-9]{2})[0-9]*/,
 			decimalsReg = /^\d+?(\.\d{1,2})?$/,//保持小数点两位
 			reg = sdata.isPositive ? /^\d+?(\.\d+)?$/ : /^-?\d+?(\.\d+)?$/;//格式正确，是数字形式

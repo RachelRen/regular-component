@@ -93,15 +93,15 @@ var Tree = Regular.extend({
 	},
 	__selectItem: function(json){
 		var self = this;
-		if(typeof self.data.onSelect == "function"){
-			self.data.onSelect.bind(this, json);
+		if(typeof this.data.onSelect == "function"){
+			this.data.onSelect.call(this, json);
 		}
 		
 		// self.$emit("selectItem", json);
 	},
 	__check: function(json){
-		if(typeof self.data.onCheck == "function"){
-			self.data.onCheck.bind(this, json.selectedItem);
+		if(typeof this.data.onCheck == "function"){
+			this.data.onCheck.call(this, json.selectedItem);
 		}
 
 	}

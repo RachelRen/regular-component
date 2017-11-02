@@ -25,7 +25,7 @@ var Checkbox = Regular.extend({
 	},
 	onChange: function($event){
 		if(typeof this.data.onChange == "function"){
-			this.data.onChange.call(this, this.data.checkbox);
+			this.data.onChange.call(this, this.data.checked);
 		}
 	}
 	

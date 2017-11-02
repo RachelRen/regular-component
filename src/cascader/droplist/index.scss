@@ -1,3 +1,4 @@
+@import "../../assets/sass/var.scss";
 .select-list-wrap{
 	border-radius: 2px;
 	background: #fff;
@@ -10,13 +11,13 @@
 		position: relative;
 		&:hover{
 			>.select-result-label{
-				background: #3084bb;
+				background: $baseLinkColor;
 				color: #fff;
 			}
 		}
 		&.selected{
 			>.select-result-label{
-				background: #3084bb;
+				background: $baseLinkColor;
 				color: #fff;
 			}
 			> .select-list-wrap{
@@ -47,7 +48,7 @@
 		
 
 		&.selected{
-			background: #3084bb;
+			background: $baseLinkColor;
 			color: #fff;
 		}
 	}

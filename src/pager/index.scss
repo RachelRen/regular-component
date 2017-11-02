@@ -60,13 +60,13 @@
 			}
 			&.prevPage{
 				&::after{
-					content: "上一页";
+					content: "<";
 					display: inline-block;
 				}
 			}
 			&.nextPage{
 				&::after{
-					content: "下一页";
+					content: ">";
 					display: inline-block;
 				}
 			}

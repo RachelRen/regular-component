@@ -42,6 +42,7 @@ var MonthPicker = Regular.extend({
 		Object.assign(newData, defaults, sdata);
 
 		this.data = newData;
+		
 			
 	},
 	init: function(){
@@ -49,7 +50,6 @@ var MonthPicker = Regular.extend({
 		var self = this,
 			sdata = self.data;
 		this.$inject(document.body);
-		debugger;
 		self.show();
 		self.__addWatcher();
 	},
@@ -67,7 +67,7 @@ var MonthPicker = Regular.extend({
 			},
 			selectedMonth: selectedMonth ? selectedMonth : thisDate.getMonth() + 1,
 			selectedYear: selectedYear ? selectedYear : thisDate.getFullYear(),
-			currentDay: currentDay ? currentDay : formatTime(thisDate, ( sdata.format || "yyyy-MM"))
+			currentDay: currentDay ? currentDay : formatTime(thisDate, sdata.format)
 		});
 	},
 	hide: function(){
@@ -146,7 +146,7 @@ var MonthPicker = Regular.extend({
 		if(item.disabled){
 			return;
 		}
-		var date = formatTime((sdata.selectedYear + "/" + month + "/01"), (sdata.format || "yyyy-MM") );
+		var date = formatTime((sdata.selectedYear + "/" + month + "/01"), sdata.format );
 		self.$update({
 			selectedMonth: month
 		});

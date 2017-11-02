@@ -2,8 +2,9 @@
 ** component: 要显示的组件
 ** target: 鼠标点击的位置
 ** placement: 组件显示的位置
+** isCenter: 看现实的组件是否要在鼠标点击的中间
 **/
-export function getLocation(component, target, placement){
+export function getLocation(component, target, placement, isCenter){
 	var client = component.getBoundingClientRect(),
 		// top = client.top,
 		// left = client.left,
@@ -36,11 +37,11 @@ export function getLocation(component, target, placement){
 	}else{
 		switch(placement){
 			case "right":
-				top = ~~(sTop - height/2);
-				left = sLeft + targetRact.width + 8;
+				top = ~~(sTop - height/2 + sHeight/2);
+				left = sLeft + targetRact.width + 8;//8箭头的宽度
 				arrowDirction = "left"
 				if(left + width > document.body.clientWidth){//太右边了，就放在左边
-					left = sLeft - width - 8;
+					left = sLeft - width;
 					arrowDirction = "right";
 				}
 				break;
@@ -54,15 +55,29 @@ export function getLocation(component, target, placement){
 				// }
 				break;
 			case "top":
-				top = ~~(sTop - height);
-				left = sLeft;
+				
+				if(isCenter){
+					left = ~~(sLeft - (width - sWidth)/2);
+					top = ~~(sTop - height -8) ;
+				}else{
+					left = sLeft;
+					top = ~~(sTop - height) ;
+				}
+				
 				arrowDirction = "bottom";
 				// top = top < 0 ? 0 : top;
 				// left = left < 0 ? 0 : left;
 				break;
 			case "bottom":
-				top = sTop + sHeight;
-				left = sLeft;
+				
+				if(isCenter){
+					left = ~~(sLeft - (width - sWidth)/2);
+					top = sTop + sHeight + 8;
+				}else{
+					left = sLeft;
+					top = sTop + sHeight;
+				}
+				
 				arrowDirction = "top";
 				// if(left + width > document.body.clientWidth){//太右边了，就放在左边
 				// 	left = sLeft - width - 8;

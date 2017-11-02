@@ -33,12 +33,20 @@ var DatePicker = Regular.extend({
 				format: "yyyy-MM-dd" //["yyyy-MM-dd", "yyyy-MM"]
 			};
 		let newData = {};
+		// debugger;
+		// if(data.mode == "month"){
+		// 	defaults.format = "yyyy-MM";
+		// }
 		Object.assign(newData, defaults, sdata);
 
 		this.data = newData;
 
+
 		if(this.data.mode == "month"){
-			this.data.format = "yyyy-MM";
+			this.data.format = this.data.format.substr(0, this.data.format.indexOf("d") - 1);
+		}
+		if(this.data.value){
+			this.data.value = formatTime(this.data.value, this.data.format)
 		}
 	},
 	init: function(){
@@ -57,18 +65,17 @@ var DatePicker = Regular.extend({
 			sdata = self.data,
 			val = $event.target.value,
 			$refs = self.$refs,
-			date = sdata.date ? new Date(sdata.date) : null;
-			// debugger;
-		if(date != "Invalid Date"){
-			var formatStr = "yyyy-MM-dd";
-			if(sdata.mode == "month"){
-				formatStr = "yyyy-MM";
-			}
-			sdata.date = formatTime(date, formatStr);
-			$event.target.value = sdata.date;
+			value = sdata.value ? new Date(sdata.value) : null;
+		if(value != "Invalid Date"){
+			// var formatStr = "yyyy-MM-dd";
+			// if(sdata.mode == "month"){
+			// 	formatStr = "yyyy-MM";
+			// }
+			sdata.value = formatTime(value, sdata.format);
+			$event.target.value = sdata.value;
 		}else{
 			// sdata.data = "";
-			$event.target.value = sdata.date;
+			$event.target.value = sdata.value;
 		}
 
 		self.$update();
@@ -93,7 +100,7 @@ var DatePicker = Regular.extend({
 		// sdata.date = json;
 		self.$refs.input.value = json;
 		self.$update({
-			date: json
+			value: json
 		});
 		self.__evToggle(false);
 	},
@@ -124,11 +131,12 @@ var DatePicker = Regular.extend({
 				this.datepicker = new picker({
 					data: {
 						target: this.$refs.element,
-						format: sdata.format
+						format: sdata.format,
+						value: sdata.value
 					}
 				}).$on("select", ($event) => {
 					this.$update({
-						date: $event
+						value: $event
 					})
 					this.datepicker.hide();
 					this.__evToggle(false);
@@ -147,7 +155,6 @@ var DatePicker = Regular.extend({
 
 
 		// let location = getLocation(this.calendar.$refs.component, self.$refs.element, "bottom");
-		// debugger;
 		this.$update();
 
 	},

@@ -2,6 +2,7 @@ import './assets/sass/style.scss';
 import Regular from 'regularjs';
 export Tree from './tree/index';
 export ToolTip from './tooltip/index';
+export Popover from './popover/index';
 
 export Component from './select/index';
 export Pager from './pager/index';
@@ -20,6 +21,8 @@ export Cascader from './cascader/index';
 export Loading from './loading/index';
 
 export AssociatedInput from './associatedinput/index';
+
+export Select from './select/index';
 
 
 

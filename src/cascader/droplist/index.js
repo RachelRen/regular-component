@@ -58,15 +58,18 @@ var DropList = Regular.extend({
 			sdata = self.data,
 			list = sdata.list;
 
-
 		this.$update({
 			selectedIndex: index,
+		});
+		// self.$refs.childSelectList.__childrenShow();
+
+	},
+	__childrenShow: function(){
+		this.$update({
 			style: {
 				display: "block"
 			}
 		});
-		
-
 	},
 	__addWatcher: function(){
 		var self = this;
@@ -84,6 +87,17 @@ var DropList = Regular.extend({
 		// 		});
 		// 	}
 		// });
+		self.$watch("show", function(newVal, oldVal){
+			if(oldVal === undefined){
+				return;
+			}
+			if(newVal){
+				this.__childrenShow();
+			}else{
+				this.hide();
+			}
+		});
+		
 
 	},
 	__addEvents: function(){
@@ -150,12 +164,12 @@ var DropList = Regular.extend({
 		var self = this,
 			$refs = self.$refs;
 
-		console.log("click");
 		self.$emit("selectList", [{
 			id: item.id,
 			name: item.name
 		}]);
-
+		this.hide();
+		this.$emit("mouseoutHide");
 			
 	},
 	__selectList: function(selectList){

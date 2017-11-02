@@ -48,17 +48,47 @@ const options = [{
 }];
 var Note = Regular.extend({
   template:`
-  	<checkbox text="rere" checked></checkbox>
-  	<DatePicker format="yyyy/MM/dd"/>
-  	<DatePicker format="yyyy/MM/dd" mode="month"/>
+  	<checkbox text="rere" checked={false}></checkbox>
+  	<DatePicker format="yyyy-MM-dd" value={"2018-1-1"} />
+  	<DatePicker format="yyyy/MM/dd" mode="month" value={"2018-1"}/>
   	<loading  />
-  	<associatedinput />
   `
 });
 
 // inject component into #app , you can also inject at 'before' , 'after', 'top'.
 var note = new Note().$inject("#component");
 
+var dataSource = [{
+	name: "name1",
+	id: 11
+},{
+	name: "name22",
+	id: 22
+},{
+	name: "name 32",
+	id: 32
+}]
+
+var associatedInput = new AssociatedInput({
+	data: {
+		dataSource: dataSource,
+		selectedList: [{
+			id: '1',
+			name: '12'
+		},{
+			id: '23',
+			name: '34'
+		}],
+		onChange: function(){
+			this.data.dataSource.push({
+				name: "name44",
+				id: 22
+			})
+		}
+	}
+})
+
+associatedInput.$inject("#component");
 // import Test from './index'
 // console.log(Test);
 let tree = new Tree({
@@ -109,6 +139,9 @@ let tree2 = new Tree({
 		})(),
 		onSelect: function(json){
 			debugger;
+		},
+		onCheck: function(json){
+			debugger;
 		}
 	}
 })
@@ -130,7 +163,7 @@ let tree3 = new Tree({
 				callback(loadList(id))
 			}
 		})(),
-		selectItemCallback: function(json){
+		onSelect: function(json){
 			debugger;
 		},
 		onCheck: function(json){
@@ -154,7 +187,15 @@ new ToolTip({
 		// placement: "right",
 		target: document.getElementById("toolTip"),
         content: "基于员工的职位、职级、年度绩效、基本薪资以及部门调薪额度，测算出建议调薪金额供主管参考。",
-        placement: "right"
+        placement: "top"
+	}
+})
+new ToolTip({
+	data: {
+		// placement: "right",
+		target: document.getElementById("toolTip1"),
+        content: "bottombottom基于员工的职位、职级、年度绩效、基本薪资以及部门调薪额度，测算出建议调薪金额供主管参考。",
+        placement: "bottom"
 	}
 })
 new Popover({
@@ -162,7 +203,8 @@ new Popover({
 		// placement: "right",
 		target: document.getElementById("popover"),
 		title: "title",
-        content: "基于员工的职位"
+        content: "基于员工的职位",
+        placement: "bottom",
 	}
 })
 
@@ -195,6 +237,8 @@ let pager = new Pager({
 	data: {
 		current: 1,
 		total: 2,
+		mode: 2,
+		hasPageSize: true,
 		onChange: function(current){
 			debugger;
 		}
@@ -211,7 +255,18 @@ var message = new Message({
 
 let inputNumber = new InputNumber({
 	data: {
-		value: 2
+		value: 2,
+		showHandler: true,//false
+		max: 3,
+		isPositive: true,
+		hasDecimal: true,
+		class: "",
+		step: 0.1,
+		maxLength: 23,
+		defaultValue: "3",
+		onChange: (value) =>{
+			console.log(value)
+		}
 	}
 });
 inputNumber.$inject("#component");
@@ -219,3 +274,14 @@ inputNumber.$inject("#component");
 
 let calendar = new Calendar();
 calendar.$inject("#component");
+
+const checkbox2 = new Checkbox({
+	data: {
+		text: 'rercheckbox2e2',
+		checked: true,
+		onChange: (o) =>{
+			debugger;
+		}
+	}
+})
+checkbox2.$inject("#component");

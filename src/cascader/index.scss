@@ -1,3 +1,4 @@
+@import "../assets/sass/var.scss";
 .select-drop{
 	position: relative;
 	display: inline-block;
@@ -11,7 +12,7 @@
 	    height: 30px;
 	    box-sizing: border-box;
 	    &:hover{
-	    	border-color: #acacac;
+	    	border-color: $baseLinkColor;
 	    }
 		.select-text{
 			position: absolute;

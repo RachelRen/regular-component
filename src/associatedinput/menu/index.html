@@ -1,7 +1,7 @@
-{#if showList.length != 0}
+{#if dataSource.length != 0}
 <div class="u-associatedmenu" id="j-menu" r-hide={isHide} r-style={style}>
 	<ul>
-		{#list showList as aList}
+		{#list dataSource as aList}
 			<li class="{aList_index == selectedIndex?'u-memu-hover':''}" on-click={this.select($event)} data-id={aList.id} index={aList_index} name={aList.name} jobNumber="{aList.id}" on-mouseover={this.mouseselect($event)}>
 				<a href="javascript:void(0)">
 					<span>{aList.name}</span>

@@ -2,8 +2,7 @@
 $successColor: #00A854;//#00A854 78be49
 $errorColor: #F04134;//#F04134 c93030
 .m-tip-wrap{
-	position: absolute;
-    position: absolute;
+    position: fixed;
     top: 10px;
     z-index: 9999;
     color: #fff;

@@ -7,7 +7,7 @@
 					{(item.name)}
 				</div>
 				{#if item.children && item.children.length}
-					<cascader-dropList list={@(item.children)} on-selectList={this.__selectList($event)} show={item_index==selectedIndex} on-mouseoutHide={this.__mouseoutHide()}></cascader-dropList>
+					<cascader-dropList list={@(item.children)} ref="childSelectList" on-selectList={this.__selectList($event)} show={item_index==selectedIndex} on-mouseoutHide={this.__mouseoutHide()}></cascader-dropList>
 				{/if}
 			</li>
 		{/list}

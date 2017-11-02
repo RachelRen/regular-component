@@ -30,6 +30,12 @@ var AssociatedInput =  Regular.extend({
 	},
 	init: function(){
 		this.newSelect();
+		var {selectedIdList, selectedList} = this.data;
+		if(selectedIdList.length){
+			selectedIdList.forEach((o) => {
+				selectedList.push(o.id);
+			})
+		}
 	},
 	backspaceAssociate: function($event){
 		if(!this.__selectMenu){
@@ -75,7 +81,7 @@ var AssociatedInput =  Regular.extend({
 			_value = _target.value,
 			_keycode = $event.which,
 			_menuData = self.__selectMenu.data;
-		if(!_menuData.selectedIndex){
+		if(!_menuData.selectedIndex) {
 			_menuData.selectedIndex = 0;
 		}
 		switch(_keycode){
@@ -86,36 +92,41 @@ var AssociatedInput =  Regular.extend({
 		case 38:
 			//往上
 			if(_menuData.selectedIndex == 0){
-				_menuData.selectedIndex = _menuData.showList.length - 1;
+				_menuData.selectedIndex = _menuData.dataSource.length - 1;
 			}else{
 				--_menuData.selectedIndex;
 			}
 			break;
 		case 40:
 			//往下
-			if(_menuData.selectedIndex == (_menuData.showList.length - 1)){
+			if(_menuData.selectedIndex == (_menuData.dataSource.length - 1)){
 				_menuData.selectedIndex = 0;
 			}else{
 				++_menuData.selectedIndex;
 			}
 			break;
 		default:
-			_menuData.showList = [{
-				name: "name",
-				id: 1
-			},{
-				name: "name2",
-				id: 2
-			},{
-				name: "name 3",
-				id: 3
-			}];
+			if(typeof this.data.onChange == "function"){
+				this.data.onChange.call(this, _value);
+			}
+			
+			// _menuData.dataSource = [{
+			// 	name: "name",
+			// 	id: 1
+			// },{
+			// 	name: "name2",
+			// 	id: 2
+			// },{
+			// 	name: "name 3",
+			// 	id: 3
+			// }];
+			_menuData.dataSource = self.data.dataSource;
 			_menuData.isHide = false;
 			_menuData.selectedIndex = 0;
 
 			// 最多展示8项
-			if (_menuData.showList.length > 10) {
-				_menuData.showList.length = 10;
+			if (_menuData.dataSource.length > 10) {
+				_menuData.dataSource.length = 10;
 			}
 
 			var _rect = _target.getBoundingClientRect(),
@@ -144,7 +155,7 @@ var AssociatedInput =  Regular.extend({
 			_selectedList = _data.selectedList,
 			_selectedIdList = _data.selectedIdList;
 		if(isEnter){
-			_selectedItem = _menuData.showList[_menuData.selectedIndex];
+			_selectedItem = _menuData.dataSource[_menuData.selectedIndex];
 		}else{
 			_selectedItem = this.__selectMenu.data.selectedText;
 		}
@@ -153,10 +164,13 @@ var AssociatedInput =  Regular.extend({
 			//说明这个不存在
 			_selectedList.push(_selectedItem);
 			_selectedIdList.push(_selectedId);
+			if(typeof this.data.onSelect == "function"){
+				this.data.onSelect.call(this, _selectedItem);
+			}
 		}
 		this.data.assInput = "";
 		_menuData.selectedIndex = -1;
-		_menuData.showList = [];
+		_menuData.dataSource = [];
 		_menuData.isHide = true;
 		this.$update();
 

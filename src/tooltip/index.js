@@ -109,7 +109,7 @@ var ToolTip = Regular.extend({
 		// 	top, left;
 		//组件，target
 
-		var location = getLocation(toolTip, target, placement);
+		var location = getLocation(toolTip, target, placement, true);
 		Regular.dom.addClass(toolTip, "zoom-big-enter zoom-big-enter-active");
 		// if(!placement){
 		// 	top = (sTop - height);
@@ -131,10 +131,10 @@ var ToolTip = Regular.extend({
 				left: location.left + "px"
 			},
 			arrowClass: {
-				'u-poptip-arrow-left': location.arrowDirction == "left",
-				'u-poptip-arrow-right': location.arrowDirction == "right",
-				'u-poptip-arrow-up': location.arrowDirction == "up",
-				'u-poptip-arrow-down': location.arrowDirction == "down"
+				'arrow-right': location.arrowDirction == "left",
+				'arrow-left': location.arrowDirction == "right",
+				'arrow-top': location.arrowDirction == "bottom",
+				'arrow-bottom': location.arrowDirction == "top"
 			}
 		});
 		setTimeout(function(){
