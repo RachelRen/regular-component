@@ -1,35 +1,17 @@
 Regular Component is a set of frend-end components built with [RegularJS](https://github.com/regularjs/regular).
 
-#Install
+# Install
 
 ```
 npm install regular-component
 ```
 
-#Usage
+# Usage
 ```
-import {Select} from 'regular-component';
+import {DatePicker} from 'regular-component';
 
-let select = new Select({
-	data: {
-		value: '1',
-		class: 'selectClass',
-		list: [{
-			value: '',
-			text: "rerer"
-		},{
-			value: 1,
-			text: "text"
-		},{
-			value: 2,
-			text: "text 2"
-		}],
-		onChange: function(value){
-			debugger;
-		}
-	}
-})
-select.$inject("#component");
+let datePicker = new DatePicker()
+datePicker.$inject(eleNode);
 ```
 
 And import style manully:
@@ -38,10 +20,10 @@ And import style manully:
 import 'regular-component/dist/index.css'
 ```
 
-#Development
+# Development
 
 ```
-$ git clone git@github.com:ant-design/ant-design.git
+$ git clone https://github.com/RachelRen/regular-component.git
 $ npm install
 $ npm start
 ```
