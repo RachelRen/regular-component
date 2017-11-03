@@ -13,11 +13,16 @@
     "lib2": "webpack --config webpack.dev.config.js --progress --colors",
     "build": "webpack --config webpack-production.config.js --progress --colors"
   },
-  "author": "Rachel Ren",
-  "license": "ISC",
+  "author": "renjiangying0575@163.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RachelRen/regular-component.git"
+  },
   "dependencies": {
     "regularjs": "^0.6.0-beta.6"
   },
+
   "devDependencies": {
     "autoprefixer": "^7.1.3",
     "babel": "^6.23.0",
