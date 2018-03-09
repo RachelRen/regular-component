@@ -37,6 +37,9 @@ const config = {
         }
       },
 
+
+      
+
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
